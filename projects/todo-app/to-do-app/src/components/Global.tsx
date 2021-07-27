@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme }>`
 	body {
         font-family: ${font.family.default}, sans-serif;
         background-color:  ${(props) => props.theme.backgroundColorBody};
-       
+        transition: 1s;
         color: ${({ theme }) => theme.backgroundColorBody};
 	}
 `;
