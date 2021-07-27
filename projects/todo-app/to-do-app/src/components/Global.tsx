@@ -29,7 +29,9 @@ export const ImageBackgroundContainer = styled.div<ImageProps>`
   height: auto;
   left: 0;
 `;
-
+export const Header = styled.header`
+  margin-top: 40px;
+`;
 export const HeaderImage = styled.div`
   background-image: ${(props) => props.theme.backgroundImgDesktop};
   display: block;

@@ -9,6 +9,7 @@ import {
   Container,
   RowSpaceBetween,
   ButtonThemeToggle,
+  Header,
 } from "./components/Global";
 import "./App.css";
 
@@ -24,21 +25,19 @@ function App() {
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
         <GlobalStyle />
         <main>
-          <header className="App-header">
+          <Header>
             <HeaderImage />
             <Container>
               <RowSpaceBetween>
                 <H1>To Do</H1>
-                <div className="mode-button">
-                  <ButtonThemeToggle
-                    onClick={() => themeToggler()}
-                  ></ButtonThemeToggle>
-                </div>
+                <ButtonThemeToggle
+                  onClick={() => themeToggler()}
+                ></ButtonThemeToggle>
               </RowSpaceBetween>
             </Container>
             <img src={logo} className="App-logo" alt="logo" />
-          </header>
-          <div className="container"></div>
+          </Header>
+          <Container></Container>
         </main>
       </ThemeProvider>
     </div>
