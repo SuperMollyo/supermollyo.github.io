@@ -11,6 +11,7 @@ import {
   Header,
 } from "./components/Global";
 import "./App.css";
+import { ToDoForm } from "./components/ToDoForm";
 import { ToDo } from "./components/ToDo";
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
             </Container>
           </Header>
           <Container>
+            <ToDoForm></ToDoForm>
             <ToDo toDoItems={DATA.todoItems} />
           </Container>
         </main>
