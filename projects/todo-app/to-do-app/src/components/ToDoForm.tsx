@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { borderRadius, font } from "../styles/StyleTokens";
+import { borderRadius, color, font } from "../styles/StyleTokens";
 
 export const InputTextBox = styled.input.attrs({ type: "text" })`
   height: 64px;
@@ -12,21 +12,25 @@ export const InputTextBox = styled.input.attrs({ type: "text" })`
   font-family: ${font.family.default}, sans-serif;
   font-size: ${font.size.default};
   color: ${({ theme }) => theme.fontColorDefault};
+  &::placeholder {
+    color: ${color.darkGrayishBlue};
+  }
 `;
-export interface ToDoFormProps {}
+export interface ToDoFormProps {
+  addToDoItem: (name: string) => void;
+}
+
 export const ToDoForm = (props: ToDoFormProps) => {
-  const [name, setName] = useState("Use hooks!");
+  const placeholderText: string = "Create a new todo...";
+  const [name, setName] = useState("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
-  };
-  const addTask = (name: string) => {
-    alert(name);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!name) return;
-    addTask(name);
+    props.addToDoItem(name);
     setName("");
   };
 
@@ -36,6 +40,7 @@ export const ToDoForm = (props: ToDoFormProps) => {
         type="text"
         className="input"
         value={name}
+        placeholder={placeholderText}
         onChange={handleChange}
       />
     </form>

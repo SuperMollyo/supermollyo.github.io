@@ -12,7 +12,8 @@ import {
 } from "./components/Global";
 import "./App.css";
 import { ToDoForm } from "./components/ToDoForm";
-import { ToDo } from "./components/ToDo";
+import { ToDo, ToDoItemProps } from "./components/ToDo";
+import { nanoid } from "nanoid";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -21,12 +22,22 @@ function App() {
     theme === "light" ? setTheme("dark") : setTheme("light");
   };
   const DATA = {
-    todoItems: [
+    toDoItems: [
       { id: "todo-0", name: "Eat", isComplete: true },
       { id: "todo-1", name: "Sleep", isComplete: false },
       { id: "todo-2", name: "Repeat", isComplete: false },
     ],
   };
+  const [tasks, setTasks] = useState(DATA.toDoItems);
+  const addTask = (name: string) => {
+    const newTask: ToDoItemProps = {
+      id: "todo-" + nanoid(),
+      name: name,
+      isComplete: false,
+    };
+    setTasks([...tasks, newTask]);
+  };
+
   return (
     <div className="App">
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
@@ -44,8 +55,8 @@ function App() {
             </Container>
           </Header>
           <Container>
-            <ToDoForm></ToDoForm>
-            <ToDo toDoItems={DATA.todoItems} />
+            <ToDoForm addToDoItem={addTask}></ToDoForm>
+            <ToDo toDoItems={tasks} />
           </Container>
         </main>
       </ThemeProvider>
