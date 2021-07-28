@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
 import styled, { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./styles/Themes";
 import {
@@ -12,6 +11,7 @@ import {
   Header,
 } from "./components/Global";
 import "./App.css";
+import { ToDo } from "./components/ToDo";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -19,7 +19,13 @@ function App() {
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
   };
-
+  const DATA = {
+    todoItems: [
+      { id: "todo-0", name: "Eat", isComplete: true },
+      { id: "todo-1", name: "Sleep", isComplete: false },
+      { id: "todo-2", name: "Repeat", isComplete: false },
+    ],
+  };
   return (
     <div className="App">
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
@@ -35,9 +41,10 @@ function App() {
                 ></ButtonThemeToggle>
               </RowSpaceBetween>
             </Container>
-            <img src={logo} className="App-logo" alt="logo" />
           </Header>
-          <Container></Container>
+          <Container>
+            <ToDo toDoItems={DATA.todoItems} />
+          </Container>
         </main>
       </ThemeProvider>
     </div>
