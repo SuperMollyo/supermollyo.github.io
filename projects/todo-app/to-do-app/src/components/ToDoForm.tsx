@@ -47,6 +47,17 @@ export const InputTextBox = styled.input.attrs({ type: "text" })`
       #626de13b
     );
   }
+  &:hover {
+    filter: drop-shadow(
+      0px 1px 8px ${(props) => props.theme.backgroundColorContainer}
+    );
+    background: linear-gradient(
+      45deg,
+      ${(props) => props.theme.backgroundColorContainer},
+      transparent,
+      #626de13b
+    );
+  }
 `;
 export interface ToDoFormProps {
   addToDoItem: (name: string) => void;

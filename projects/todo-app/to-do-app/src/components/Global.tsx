@@ -65,7 +65,7 @@ export const ButtonThemeToggle = styled.button`
   width: 26px;
   height: 26px;
   &:hover {
-    filter: drop-shadow(2px 2px 3px black);
+    filter: drop-shadow(0px 0px 5px white);
     transform: scale(1.1);
   }
 `;
