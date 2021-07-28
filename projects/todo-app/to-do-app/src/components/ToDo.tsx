@@ -30,13 +30,17 @@ export const InputCheckBox = styled.input.attrs({ type: "checkbox" })`
     margin-right: 24px;
     width: 24px;
     height: 24px;
-    background: white;
+    background: ${(props) => props.theme.backgroundColorContainer};
     border-radius: 100%;
     border: 1px solid ${(props) => props.theme.borderColor};
   }
   & + ${LabelRound}:hover::before {
     border: 1px solid transparent;
-    background-image: linear-gradient(white, white), ${gradient.bluePurple};
+    background-image: linear-gradient(
+        ${(props) => props.theme.backgroundColorContainer},
+        ${(props) => props.theme.backgroundColorContainer}
+      ),
+      ${gradient.bluePurple};
     background-origin: border-box;
     background-clip: content-box, border-box;
     opacity: 1;
