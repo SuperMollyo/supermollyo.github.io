@@ -21,21 +21,44 @@ function App() {
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
   };
+  const toDoItemToggler = (id: string) => {
+    // console.log(items[0]);
+    const updatedItems = items.map((item) => {
+      console.log("item: " + item.name);
+      if (id === item.id) {
+        // console.log("item: " + item.name + "isComplete: " + item.isComplete);
+        // item.isComplete = !item.isComplete;
+        // console.log("item: " + item.name + "isComplete: " + item.isComplete);
+        // return item;
+        return { ...item, isComplete: !item.isComplete };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+
   const DATA = {
     toDoItems: [
-      { id: "todo-0", name: "Eat", isComplete: true },
-      { id: "todo-1", name: "Sleep", isComplete: false },
-      { id: "todo-2", name: "Repeat", isComplete: false },
+      {
+        id: "todo-0",
+        name: "Eat",
+        isComplete: true,
+      },
+      {
+        id: "todo-1",
+        name: "Sleep",
+        isComplete: false,
+      },
     ],
   };
-  const [tasks, setTasks] = useState(DATA.toDoItems);
-  const addTask = (name: string) => {
-    const newTask: ToDoItemProps = {
+  const [items, setItems] = useState(DATA.toDoItems);
+  const addItem = (name: string) => {
+    const newItem: ToDoItemProps = {
       id: "todo-" + nanoid(),
       name: name,
       isComplete: false,
     };
-    setTasks([...tasks, newTask]);
+    setItems([...items, newItem]);
   };
 
   return (
@@ -55,8 +78,8 @@ function App() {
             </Container>
           </Header>
           <Container>
-            <ToDoForm addToDoItem={addTask}></ToDoForm>
-            <ToDo toDoItems={tasks} />
+            <ToDoForm addToDoItem={addItem}></ToDoForm>
+            <ToDo toDoItems={items} toggleIsComplete={toDoItemToggler} />
           </Container>
         </main>
       </ThemeProvider>

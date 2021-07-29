@@ -99,15 +99,19 @@ export const ButtonDelete = styled.button`
     background-size: 12px;
   }
 `;
-export const CheckboxRound = (props: ToDoItemProps) => {
+export const CheckboxRound = (props: {
+  toDoItem: ToDoItemProps;
+  toggleFunction: (id: string) => void;
+}) => {
   return (
     <div>
       <InputCheckBox
         type="checkbox"
-        id={props.id}
-        defaultChecked={props.isComplete}
+        id={props.toDoItem.id}
+        defaultChecked={props.toDoItem.isComplete}
+        onChange={() => props.toggleFunction(props.toDoItem.id)}
       />
-      <LabelRound htmlFor={props.id}>{props.name}</LabelRound>
+      <LabelRound htmlFor={props.toDoItem.id}>{props.toDoItem.name}</LabelRound>
     </div>
   );
 };
@@ -136,13 +140,15 @@ export const Li = styled.li`
     padding: 15px;
   }
 `;
-export const ToDoItem = (props: ToDoItemProps) => {
+export const ToDoItem = (props: {
+  toDoItem: ToDoItemProps;
+  toggleFunction: (id: string) => void;
+}) => {
   return (
     <Li>
       <CheckboxRound
-        id={props.id}
-        name={props.name}
-        isComplete={props.isComplete}
+        toDoItem={props.toDoItem}
+        toggleFunction={props.toggleFunction}
       />
       <ButtonDelete></ButtonDelete>
     </Li>
@@ -162,6 +168,7 @@ export const ToDoDisplayPanel = styled.div`
 `;
 export interface ToDoProps {
   toDoItems: ToDoItemProps[];
+  toggleIsComplete: (id: string) => void;
 }
 export const ItemCountDisplay = styled.p``;
 export const ButtonClear = styled.button`
@@ -208,9 +215,8 @@ export const ToDo = (props: ToDoProps) => {
         {props.toDoItems.map((toDoItem: ToDoItemProps, index: number) => (
           <ToDoItem
             key={index}
-            id={toDoItem.id}
-            name={toDoItem.name}
-            isComplete={toDoItem.isComplete}
+            toDoItem={toDoItem}
+            toggleFunction={props.toggleIsComplete}
           />
         ))}
       </Ul>
