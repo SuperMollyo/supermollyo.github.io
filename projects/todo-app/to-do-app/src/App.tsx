@@ -89,9 +89,10 @@ function App() {
     setItems(updatedItems);
     decrementItemsLeft();
   };
-  const clearAllItems = () => {
-    setItems([]);
-    setItemsLeftCount(0);
+  const clearCompletedItems = () => {
+    const updatedItems = items.filter((items) => items.isComplete === false);
+    setItems(updatedItems);
+    setItemsLeftCount(updatedItems.length);
   };
   return (
     <div className="App">
@@ -116,7 +117,7 @@ function App() {
               toggleIsComplete={toDoItemToggler}
               deleteItem={deleteItem}
               itemsLeft={itemsLeftCount}
-              clearAllItems={clearAllItems}
+              clearAllItems={clearCompletedItems}
             />
           </Container>
         </main>
