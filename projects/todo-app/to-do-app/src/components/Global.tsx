@@ -10,6 +10,10 @@ export const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme }>`
         transition: 1s;
         color: ${({ theme }) => theme.backgroundColorBody};
 	}
+  button {
+    font-family: ${font.family.default}, sans-serif;
+    cursor: pointer;
+  }
 `;
 
 export const H1 = styled.h1`

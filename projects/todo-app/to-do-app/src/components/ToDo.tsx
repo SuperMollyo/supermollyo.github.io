@@ -3,6 +3,7 @@ import styled from "styled-components";
 import iconCheck from "../images/icon-check.svg";
 import iconX from "../images/icon-cross.svg";
 import { borderRadius, font, gradient } from "../styles/StyleTokens";
+import { RowSpaceBetween } from "./Global";
 
 export const LabelRound = styled.label`
   cursor: pointer;
@@ -98,6 +99,11 @@ export const CheckboxRound = (props: ToDoItemProps) => {
     </div>
   );
 };
+export const ToDoContainer = styled.ul`
+  background: ${(props) => props.theme.backgroundColorContainer};
+  border-radius: ${borderRadius.default};
+  padding: 0;
+`;
 export const Ul = styled.ul`
   background: ${(props) => props.theme.backgroundColorContainer};
   border-radius: ${borderRadius.default};
@@ -107,7 +113,7 @@ export const Li = styled.li`
   display: flex;
   justify-content: space-between;
   height: 25px;
-  border-top: 1px solid ${(props) => props.theme.borderColor};
+  border-bottom: 1px solid ${(props) => props.theme.borderColor};
   padding: 20px;
   &:first-child {
     border-top: none;
@@ -125,14 +131,52 @@ export const ToDoItem = (props: ToDoItemProps) => {
     </Li>
   );
 };
-
+export const ToDoDisplayPanel = styled.div`
+  height: 50px;
+  padding: 0px 20px;
+  color: ${(props) => props.theme.fontColorSecondary};
+  font-size: ${font.size.secondary};
+  position: relative;
+`;
 export interface ToDoProps {
   toDoItems: ToDoItemProps[];
 }
-
+export const ItemCountDisplay = styled.p``;
+export const ButtonClear = styled.button`
+  background: none;
+  border: none;
+  color: ${(props) => props.theme.fontColorSecondary};
+  &:hover {
+    color: ${(props) => props.theme.fontColorDefault};
+  }
+`;
+export const ToDoFilter = styled.div`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 16px;
+  @media (max-width: 576px) {
+    background: ${(props) => props.theme.backgroundColorContainer};
+    width: 100%;
+    height: 32px;
+    top: 130%;
+    text-align: center;
+    padding-top: 16px;
+    border-radius: ${borderRadius.default};
+  }
+`;
+export const ButtonFilterAction = styled.button`
+  background: none;
+  border: none;
+  color: ${(props) => props.theme.fontColorSecondary};
+  font-weight: ${font.weight.bold};
+  &:hover {
+    color: ${(props) => props.theme.fontColorDefault};
+  }
+`;
 export const ToDo = (props: ToDoProps) => {
   return (
-    <div>
+    <ToDoContainer>
       <Ul role="list" aria-labelledby="list-heading">
         {props.toDoItems.map((toDoItem: ToDoItemProps, index: number) => (
           <ToDoItem
@@ -143,6 +187,19 @@ export const ToDo = (props: ToDoProps) => {
           />
         ))}
       </Ul>
-    </div>
+      <ToDoDisplayPanel>
+        <RowSpaceBetween>
+          <ItemCountDisplay>
+            {props.toDoItems.length} items left
+          </ItemCountDisplay>
+          <ButtonClear>Clear Completed</ButtonClear>
+        </RowSpaceBetween>
+        <ToDoFilter>
+          <ButtonFilterAction>All</ButtonFilterAction>
+          <ButtonFilterAction>Active</ButtonFilterAction>
+          <ButtonFilterAction>Completed</ButtonFilterAction>
+        </ToDoFilter>
+      </ToDoDisplayPanel>
+    </ToDoContainer>
   );
 };
