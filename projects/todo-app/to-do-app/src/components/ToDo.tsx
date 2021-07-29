@@ -174,6 +174,7 @@ export interface ToDoProps {
   toDoItems: ToDoItemProps[];
   toggleIsComplete: (id: string) => void;
   deleteItem: (id: string) => void;
+  itemsLeft: number;
 }
 export const ItemCountDisplay = styled.p``;
 export const ButtonClear = styled.button`
@@ -214,6 +215,7 @@ export const ButtonFilterAction = styled.button`
   }
 `;
 export const ToDo = (props: ToDoProps) => {
+  const itemString = props.itemsLeft !== 1 ? "items" : "item";
   return (
     <ToDoContainer>
       <Ul role="list" aria-labelledby="list-heading">
@@ -229,7 +231,7 @@ export const ToDo = (props: ToDoProps) => {
       <ToDoDisplayPanel>
         <RowSpaceBetween>
           <ItemCountDisplay>
-            {props.toDoItems.length} items left
+            {props.itemsLeft} {itemString} left
           </ItemCountDisplay>
           <ButtonClear>Clear Completed</ButtonClear>
         </RowSpaceBetween>

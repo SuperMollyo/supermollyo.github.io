@@ -24,12 +24,18 @@ function App() {
   const toDoItemToggler = (id: string) => {
     // console.log(items[0]);
     const updatedItems = items.map((item) => {
-      console.log("item: " + item.name);
+      // console.log("item: " + item.name);
+      console.log("item: " + item.name + "isComplete: " + item.isComplete);
       if (id === item.id) {
         // console.log("item: " + item.name + "isComplete: " + item.isComplete);
         // item.isComplete = !item.isComplete;
         // console.log("item: " + item.name + "isComplete: " + item.isComplete);
         // return item;
+        if (item.isComplete === true) {
+          setItemsLeftCount(itemsLeftCount + 1);
+        } else {
+          decrementItemsLeft();
+        }
         return { ...item, isComplete: !item.isComplete };
       }
       return item;
@@ -52,6 +58,22 @@ function App() {
     ],
   };
   const [items, setItems] = useState(DATA.toDoItems);
+  const countItemsLeft = () => {
+    let count = 0;
+    items.map((item) => {
+      if (item.isComplete === false) {
+        count++;
+      }
+    });
+    return count;
+  };
+  const decrementItemsLeft = () => {
+    if (itemsLeftCount !== 0) {
+      setItemsLeftCount(itemsLeftCount - 1);
+    }
+  };
+  const [itemsLeftCount, setItemsLeftCount] = useState(countItemsLeft);
+
   const addItem = (name: string) => {
     const newItem: ToDoItemProps = {
       id: "todo-" + nanoid(),
@@ -59,11 +81,13 @@ function App() {
       isComplete: false,
     };
     setItems([...items, newItem]);
+    setItemsLeftCount(itemsLeftCount + 1);
   };
   const deleteItem = (id: string) => {
     console.log("delete");
     const updatedItems = items.filter((items) => id !== items.id);
     setItems(updatedItems);
+    decrementItemsLeft();
   };
   return (
     <div className="App">
@@ -87,6 +111,7 @@ function App() {
               toDoItems={items}
               toggleIsComplete={toDoItemToggler}
               deleteItem={deleteItem}
+              itemsLeft={itemsLeftCount}
             />
           </Container>
         </main>
