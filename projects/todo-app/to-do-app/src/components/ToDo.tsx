@@ -9,6 +9,9 @@ export const LabelRound = styled.label`
   cursor: pointer;
   color: ${(props) => props.theme.fontColorDefault};
   font-size: ${font.size.default};
+  @media (max-width: 576px) {
+    font-size: ${font.size.mobileDefault};
+  }
 `;
 export const InputCheckBox = styled.input.attrs({ type: "checkbox" })`
   /* visibility: hidden; */
@@ -34,6 +37,10 @@ export const InputCheckBox = styled.input.attrs({ type: "checkbox" })`
     background: ${(props) => props.theme.backgroundColorContainer};
     border-radius: 100%;
     border: 1px solid ${(props) => props.theme.borderColor};
+    @media (max-width: 576px) {
+      width: 20px;
+      height: 20px;
+    }
   }
   & + ${LabelRound}:hover::before {
     border: 1px solid transparent;
@@ -86,6 +93,11 @@ export const ButtonDelete = styled.button`
     filter: drop-shadow(2px 2px 3px black);
     transform: scale(1.1);
   }
+  @media (max-width: 576px) {
+    width: 12px;
+    height: 12px;
+    background-size: 12px;
+  }
 `;
 export const CheckboxRound = (props: ToDoItemProps) => {
   return (
@@ -118,6 +130,10 @@ export const Li = styled.li`
   &:first-child {
     border-top: none;
   }
+  @media (max-width: 576px) {
+    height: 22px;
+    padding: 15px;
+  }
 `;
 export const ToDoItem = (props: ToDoItemProps) => {
   return (
@@ -133,10 +149,15 @@ export const ToDoItem = (props: ToDoItemProps) => {
 };
 export const ToDoDisplayPanel = styled.div`
   height: 50px;
-  padding: 0px 20px;
+  padding: 4px 20px 0;
   color: ${(props) => props.theme.fontColorSecondary};
   font-size: ${font.size.secondary};
   position: relative;
+  @media (max-width: 576px) {
+    padding: 4px 15px 0;
+    height: 47px;
+    font-size: ${font.size.mobileDefault};
+  }
 `;
 export interface ToDoProps {
   toDoItems: ToDoItemProps[];
@@ -145,6 +166,7 @@ export const ItemCountDisplay = styled.p``;
 export const ButtonClear = styled.button`
   background: none;
   border: none;
+  padding: 0;
   color: ${(props) => props.theme.fontColorSecondary};
   &:hover {
     color: ${(props) => props.theme.fontColorDefault};
@@ -172,6 +194,9 @@ export const ButtonFilterAction = styled.button`
   font-weight: ${font.weight.bold};
   &:hover {
     color: ${(props) => props.theme.fontColorDefault};
+  }
+  @media (max-width: 576px) {
+    font-size: ${font.size.secondary};
   }
 `;
 export const ToDo = (props: ToDoProps) => {

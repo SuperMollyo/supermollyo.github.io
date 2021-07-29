@@ -28,6 +28,8 @@ export const font = {
     default: `18px`,
     secondary: `14px`,
     h1: `40px`,
+    mobileH1: `27px`,
+    mobileDefault: `12px`,
   },
   weight: {
     default: 400,

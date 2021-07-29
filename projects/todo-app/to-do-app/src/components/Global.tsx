@@ -6,13 +6,21 @@ import { font } from "../styles/StyleTokens";
 export const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme }>`
 	body {
         font-family: ${font.family.default}, sans-serif;
+        font-size: ${font.size.default};
         background-color:  ${(props) => props.theme.backgroundColorBody};
         transition: 1s;
         color: ${({ theme }) => theme.backgroundColorBody};
+        @media (max-width: 576px) {
+          font-size: ${font.size.mobileDefault};
+        }
 	}
   button {
     font-family: ${font.family.default}, sans-serif;
+    /* font-size: ${font.size.default}; */
     cursor: pointer;
+    @media (max-width: 576px) {
+      font-size: ${font.size.mobileDefault};
+    }
   }
 `;
 
@@ -22,6 +30,10 @@ export const H1 = styled.h1`
   text-transform: uppercase;
   letter-spacing: 15px;
   font-weight: ${font.weight.bold};
+  @media (max-width: 576px) {
+    font-size: ${font.size.mobileH1};
+    letter-spacing: 9px;
+  }
 `;
 export interface ImageProps {
   sourceUrl: string;
@@ -35,6 +47,9 @@ export const ImageBackgroundContainer = styled.div<ImageProps>`
 `;
 export const Header = styled.header`
   margin-top: 40px;
+  @media (max-width: 576px) {
+    margin-top: 28px;
+  }
 `;
 export const HeaderImage = styled.div`
   background-image: ${(props) => props.theme.backgroundImgDesktop};
@@ -47,11 +62,18 @@ export const HeaderImage = styled.div`
   top: 0;
   z-index: -1;
   transition: 1s;
+  @media (max-width: 576px) {
+    background-image: ${(props) => props.theme.backgroundImgMobile};
+    padding-bottom: 53.5%;
+  }
 `;
 export const Container = styled.div`
   max-width: 540px;
   margin-left: auto;
   margin-right: auto;
+  @media (max-width: 576px) {
+    max-width: 327px;
+  }
 `;
 export const RowSpaceBetween = styled.div`
   display: flex;
@@ -62,7 +84,6 @@ export const RowSpaceBetween = styled.div`
 export const ButtonThemeToggle = styled.button`
   border: none;
   background: none;
-  cursor: pointer;
   transition: 1s;
   background-image: ${(props) => props.theme.iconImg};
   background-repeat: no-repeat;

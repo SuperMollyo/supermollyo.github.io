@@ -8,10 +8,17 @@ export const InputContainer = styled.div`
   grid-gap: 24px;
   height: 64px;
   width: 100%;
+  margin-top: 25px;
+  margin-bottom: 23px;
   border-radius: ${borderRadius.default};
   border: 1px solid transparent;
   background: ${(props) => props.theme.backgroundColorContainer};
   align-items: center;
+  @media (max-width: 576px) {
+    height: 48px;
+    margin-top: 16px;
+    margin-bottom: 10px;
+  }
 `;
 export const CircleIcon = styled.div`
   margin-left: 20px;
@@ -57,6 +64,9 @@ export const InputTextBox = styled.input.attrs({ type: "text" })`
       transparent,
       #626de13b
     );
+  }
+  @media (max-width: 576px) {
+    font-size: ${font.size.mobileDefault};
   }
 `;
 export interface ToDoFormProps {
