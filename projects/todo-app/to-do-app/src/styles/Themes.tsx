@@ -20,6 +20,7 @@ export const lightTheme: DefaultTheme = {
   backgroundImgMobile: `url(${bgLightMobile})`,
   borderColor: color.veryLightGrayishBlue,
   iconImg: `url(${iconLight})`,
+  dropShadow: `0px 35px 50px -15px rgba(194, 195, 214, 0.5)`,
 };
 
 export type ThemeType = typeof lightTheme;
@@ -35,4 +36,5 @@ export const darkTheme: DefaultTheme = {
   backgroundImgMobile: `url(${bgDarkMobile})`,
   borderColor: color.veryDarkGrayishBlueAlt2,
   iconImg: `url(${iconDark})`,
+  dropShadow: `none`,
 };

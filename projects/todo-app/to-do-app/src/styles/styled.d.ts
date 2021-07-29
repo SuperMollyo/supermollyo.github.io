@@ -13,5 +13,6 @@ declare module "styled-components" {
     backgroundImgMobile: string;
     borderColor: string;
     iconImg: string;
+    dropShadow: string;
   }
 }

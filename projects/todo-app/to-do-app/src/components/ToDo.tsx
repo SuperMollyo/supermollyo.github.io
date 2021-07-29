@@ -115,6 +115,7 @@ export const ToDoContainer = styled.ul`
   background: ${(props) => props.theme.backgroundColorContainer};
   border-radius: ${borderRadius.default};
   padding: 0;
+  box-shadow: ${(props) => props.theme.dropShadow};
 `;
 export const Ul = styled.ul`
   background: ${(props) => props.theme.backgroundColorContainer};
@@ -185,6 +186,7 @@ export const ToDoFilter = styled.div`
     text-align: center;
     padding-top: 16px;
     border-radius: ${borderRadius.default};
+    box-shadow: ${(props) => props.theme.dropShadow};
   }
 `;
 export const ButtonFilterAction = styled.button`
