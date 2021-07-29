@@ -60,7 +60,11 @@ function App() {
     };
     setItems([...items, newItem]);
   };
-
+  const deleteItem = (id: string) => {
+    console.log("delete");
+    const updatedItems = items.filter((items) => id !== items.id);
+    setItems(updatedItems);
+  };
   return (
     <div className="App">
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
@@ -79,7 +83,11 @@ function App() {
           </Header>
           <Container>
             <ToDoForm addToDoItem={addItem}></ToDoForm>
-            <ToDo toDoItems={items} toggleIsComplete={toDoItemToggler} />
+            <ToDo
+              toDoItems={items}
+              toggleIsComplete={toDoItemToggler}
+              deleteItem={deleteItem}
+            />
           </Container>
         </main>
       </ThemeProvider>

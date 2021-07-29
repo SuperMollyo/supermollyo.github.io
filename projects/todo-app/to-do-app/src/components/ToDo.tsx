@@ -143,6 +143,7 @@ export const Li = styled.li`
 export const ToDoItem = (props: {
   toDoItem: ToDoItemProps;
   toggleFunction: (id: string) => void;
+  deleteFunction: (id: string) => void;
 }) => {
   return (
     <Li>
@@ -150,7 +151,10 @@ export const ToDoItem = (props: {
         toDoItem={props.toDoItem}
         toggleFunction={props.toggleFunction}
       />
-      <ButtonDelete></ButtonDelete>
+      <ButtonDelete
+        type="button"
+        onClick={() => props.deleteFunction(props.toDoItem.id)}
+      ></ButtonDelete>
     </Li>
   );
 };
@@ -169,6 +173,7 @@ export const ToDoDisplayPanel = styled.div`
 export interface ToDoProps {
   toDoItems: ToDoItemProps[];
   toggleIsComplete: (id: string) => void;
+  deleteItem: (id: string) => void;
 }
 export const ItemCountDisplay = styled.p``;
 export const ButtonClear = styled.button`
@@ -217,6 +222,7 @@ export const ToDo = (props: ToDoProps) => {
             key={index}
             toDoItem={toDoItem}
             toggleFunction={props.toggleIsComplete}
+            deleteFunction={props.deleteItem}
           />
         ))}
       </Ul>
