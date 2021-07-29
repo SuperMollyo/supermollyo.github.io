@@ -175,6 +175,7 @@ export interface ToDoProps {
   toggleIsComplete: (id: string) => void;
   deleteItem: (id: string) => void;
   itemsLeft: number;
+  clearAllItems: () => void;
 }
 export const ItemCountDisplay = styled.p``;
 export const ButtonClear = styled.button`
@@ -233,7 +234,9 @@ export const ToDo = (props: ToDoProps) => {
           <ItemCountDisplay>
             {props.itemsLeft} {itemString} left
           </ItemCountDisplay>
-          <ButtonClear>Clear Completed</ButtonClear>
+          <ButtonClear type="button" onClick={() => props.clearAllItems()}>
+            Clear Completed
+          </ButtonClear>
         </RowSpaceBetween>
         <ToDoFilter>
           <ButtonFilterAction>All</ButtonFilterAction>

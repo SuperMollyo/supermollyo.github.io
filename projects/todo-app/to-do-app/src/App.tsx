@@ -89,6 +89,10 @@ function App() {
     setItems(updatedItems);
     decrementItemsLeft();
   };
+  const clearAllItems = () => {
+    setItems([]);
+    setItemsLeftCount(0);
+  };
   return (
     <div className="App">
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
@@ -112,6 +116,7 @@ function App() {
               toggleIsComplete={toDoItemToggler}
               deleteItem={deleteItem}
               itemsLeft={itemsLeftCount}
+              clearAllItems={clearAllItems}
             />
           </Container>
         </main>
