@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import iconCheck from "../images/icon-check.svg";
 import iconX from "../images/icon-cross.svg";
@@ -215,19 +215,28 @@ export const ButtonFilterAction = styled.button`
     font-size: ${font.size.secondary};
   }
 `;
+const FILTER_MAP: any = {
+  All: () => true,
+  Active: (items: ToDoItemProps) => items.isComplete !== true,
+  Completed: (items: ToDoItemProps) => items.isComplete !== false,
+};
 export const ToDo = (props: ToDoProps) => {
   const itemString = props.itemsLeft !== 1 ? "items" : "item";
+  const [filter, setFilter] = useState("All");
+
   return (
     <ToDoContainer>
       <Ul role="list" aria-labelledby="list-heading">
-        {props.toDoItems.map((toDoItem: ToDoItemProps, index: number) => (
-          <ToDoItem
-            key={index}
-            toDoItem={toDoItem}
-            toggleFunction={props.toggleIsComplete}
-            deleteFunction={props.deleteItem}
-          />
-        ))}
+        {props.toDoItems
+          .filter(FILTER_MAP[filter])
+          .map((toDoItem: ToDoItemProps, index: number) => (
+            <ToDoItem
+              key={toDoItem.id}
+              toDoItem={toDoItem}
+              toggleFunction={props.toggleIsComplete}
+              deleteFunction={props.deleteItem}
+            />
+          ))}
       </Ul>
       <ToDoDisplayPanel>
         <RowSpaceBetween>
@@ -239,9 +248,18 @@ export const ToDo = (props: ToDoProps) => {
           </ButtonClear>
         </RowSpaceBetween>
         <ToDoFilter>
-          <ButtonFilterAction>All</ButtonFilterAction>
-          <ButtonFilterAction>Active</ButtonFilterAction>
-          <ButtonFilterAction>Completed</ButtonFilterAction>
+          <ButtonFilterAction type="button" onClick={() => setFilter("All")}>
+            All
+          </ButtonFilterAction>
+          <ButtonFilterAction type="button" onClick={() => setFilter("Active")}>
+            Active
+          </ButtonFilterAction>
+          <ButtonFilterAction
+            type="button"
+            onClick={() => setFilter("Completed")}
+          >
+            Completed
+          </ButtonFilterAction>
         </ToDoFilter>
       </ToDoDisplayPanel>
     </ToDoContainer>
