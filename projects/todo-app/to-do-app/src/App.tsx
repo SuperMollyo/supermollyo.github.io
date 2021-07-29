@@ -47,7 +47,7 @@ function App() {
             <HeaderImage />
             <Container>
               <RowSpaceBetween>
-                <H1>To Do</H1>
+                <H1>ToDo</H1>
                 <ButtonThemeToggle
                   onClick={() => themeToggler()}
                 ></ButtonThemeToggle>
