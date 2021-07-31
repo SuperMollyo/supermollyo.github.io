@@ -12,7 +12,7 @@ import {
 } from "./components/Global";
 import "./App.css";
 import { ToDoForm } from "./components/ToDoForm";
-import { ToDo, ToDoItemProps } from "./components/ToDo";
+import { FILTER_MAP, ToDo, ToDoItem, ToDoItemProps } from "./components/ToDo";
 import { nanoid } from "nanoid";
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
   };
-  const toDoItemToggler = (id: string) => {
+  const toggleIsComplete = (id: string) => {
     // console.log(items[0]);
     const updatedItems = items.map((item) => {
       // console.log("item: " + item.name);
@@ -58,6 +58,7 @@ function App() {
     ],
   };
   const [items, setItems] = useState(DATA.toDoItems);
+  const [filter, setFilter] = useState("All");
   const countItemsLeft = () => {
     let count = 0;
     items.map((item) => {
@@ -73,7 +74,6 @@ function App() {
     }
   };
   const [itemsLeftCount, setItemsLeftCount] = useState(countItemsLeft);
-
   const addItem = (name: string) => {
     const newItem: ToDoItemProps = {
       id: "todo-" + nanoid(),
@@ -94,6 +94,16 @@ function App() {
     setItems(updatedItems);
     setItemsLeftCount(updatedItems.length);
   };
+  const toDoList = items
+    .filter(FILTER_MAP[filter])
+    .map((toDoItem: ToDoItemProps) => (
+      <ToDoItem
+        key={toDoItem.id}
+        toDoItem={toDoItem}
+        toggleIsComplete={toggleIsComplete}
+        deleteItem={deleteItem}
+      />
+    ));
   return (
     <div className="App">
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
@@ -113,10 +123,11 @@ function App() {
           <Container>
             <ToDoForm addToDoItem={addItem}></ToDoForm>
             <ToDo
-              toDoItems={items}
-              toggleIsComplete={toDoItemToggler}
+              ToDoItem={toDoList}
+              toggleIsComplete={toggleIsComplete}
               deleteItem={deleteItem}
               itemsLeft={itemsLeftCount}
+              filterItems={setFilter}
               clearAllItems={clearCompletedItems}
             />
           </Container>

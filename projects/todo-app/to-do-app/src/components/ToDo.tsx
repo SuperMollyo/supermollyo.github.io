@@ -142,18 +142,18 @@ export const Li = styled.li`
 `;
 export const ToDoItem = (props: {
   toDoItem: ToDoItemProps;
-  toggleFunction: (id: string) => void;
-  deleteFunction: (id: string) => void;
+  toggleIsComplete: (id: string) => void;
+  deleteItem: (id: string) => void;
 }) => {
   return (
     <Li>
       <CheckboxRound
         toDoItem={props.toDoItem}
-        toggleFunction={props.toggleFunction}
+        toggleFunction={props.toggleIsComplete}
       />
       <ButtonDelete
         type="button"
-        onClick={() => props.deleteFunction(props.toDoItem.id)}
+        onClick={() => props.deleteItem(props.toDoItem.id)}
       ></ButtonDelete>
     </Li>
   );
@@ -171,9 +171,10 @@ export const ToDoDisplayPanel = styled.div`
   }
 `;
 export interface ToDoProps {
-  toDoItems: ToDoItemProps[];
+  ToDoItem: React.ReactNode;
   toggleIsComplete: (id: string) => void;
   deleteItem: (id: string) => void;
+  filterItems: (filterName: string) => void;
   itemsLeft: number;
   clearAllItems: () => void;
 }
@@ -215,28 +216,19 @@ export const ButtonFilterAction = styled.button`
     font-size: ${font.size.secondary};
   }
 `;
-const FILTER_MAP: any = {
+export const FILTER_MAP: any = {
   All: () => true,
   Active: (items: ToDoItemProps) => items.isComplete !== true,
   Completed: (items: ToDoItemProps) => items.isComplete !== false,
 };
+
 export const ToDo = (props: ToDoProps) => {
   const itemString = props.itemsLeft !== 1 ? "items" : "item";
-  const [filter, setFilter] = useState("All");
 
   return (
     <ToDoContainer>
       <Ul role="list" aria-labelledby="list-heading">
-        {props.toDoItems
-          .filter(FILTER_MAP[filter])
-          .map((toDoItem: ToDoItemProps, index: number) => (
-            <ToDoItem
-              key={toDoItem.id}
-              toDoItem={toDoItem}
-              toggleFunction={props.toggleIsComplete}
-              deleteFunction={props.deleteItem}
-            />
-          ))}
+        {props.ToDoItem}
       </Ul>
       <ToDoDisplayPanel>
         <RowSpaceBetween>
@@ -248,15 +240,21 @@ export const ToDo = (props: ToDoProps) => {
           </ButtonClear>
         </RowSpaceBetween>
         <ToDoFilter>
-          <ButtonFilterAction type="button" onClick={() => setFilter("All")}>
+          <ButtonFilterAction
+            type="button"
+            onClick={() => props.filterItems("All")}
+          >
             All
           </ButtonFilterAction>
-          <ButtonFilterAction type="button" onClick={() => setFilter("Active")}>
+          <ButtonFilterAction
+            type="button"
+            onClick={() => props.filterItems("Active")}
+          >
             Active
           </ButtonFilterAction>
           <ButtonFilterAction
             type="button"
-            onClick={() => setFilter("Completed")}
+            onClick={() => props.filterItems("Completed")}
           >
             Completed
           </ButtonFilterAction>
