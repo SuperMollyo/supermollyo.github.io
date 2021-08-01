@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import iconCheck from "../images/icon-check.svg";
 import iconX from "../images/icon-cross.svg";
-import { borderRadius, font, gradient } from "../styles/StyleTokens";
+import { borderRadius, color, font, gradient } from "../styles/StyleTokens";
 import { RowSpaceBetween } from "./Global";
-
 export const LabelRound = styled.label`
   cursor: pointer;
   color: ${(props) => props.theme.fontColorDefault};
@@ -172,9 +171,9 @@ export const ToDoDisplayPanel = styled.div`
 `;
 export interface ToDoProps {
   ToDoItem: React.ReactNode;
+  filterButtonList: JSX.Element[];
   toggleIsComplete: (id: string) => void;
   deleteItem: (id: string) => void;
-  filterItems: (filterName: string) => void;
   itemsLeft: number;
   clearAllItems: () => void;
 }
@@ -204,23 +203,6 @@ export const ToDoFilter = styled.div`
     box-shadow: ${(props) => props.theme.dropShadow};
   }
 `;
-export const ButtonFilterAction = styled.button`
-  background: none;
-  border: none;
-  color: ${(props) => props.theme.fontColorSecondary};
-  font-weight: ${font.weight.bold};
-  &:hover {
-    color: ${(props) => props.theme.fontColorDefault};
-  }
-  @media (max-width: 576px) {
-    font-size: ${font.size.secondary};
-  }
-`;
-export const FILTER_MAP: any = {
-  All: () => true,
-  Active: (items: ToDoItemProps) => items.isComplete !== true,
-  Completed: (items: ToDoItemProps) => items.isComplete !== false,
-};
 
 export const ToDo = (props: ToDoProps) => {
   const itemString = props.itemsLeft !== 1 ? "items" : "item";
@@ -239,26 +221,7 @@ export const ToDo = (props: ToDoProps) => {
             Clear Completed
           </ButtonClear>
         </RowSpaceBetween>
-        <ToDoFilter>
-          <ButtonFilterAction
-            type="button"
-            onClick={() => props.filterItems("All")}
-          >
-            All
-          </ButtonFilterAction>
-          <ButtonFilterAction
-            type="button"
-            onClick={() => props.filterItems("Active")}
-          >
-            Active
-          </ButtonFilterAction>
-          <ButtonFilterAction
-            type="button"
-            onClick={() => props.filterItems("Completed")}
-          >
-            Completed
-          </ButtonFilterAction>
-        </ToDoFilter>
+        <ToDoFilter>{props.filterButtonList}</ToDoFilter>
       </ToDoDisplayPanel>
     </ToDoContainer>
   );

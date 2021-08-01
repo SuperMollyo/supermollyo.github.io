@@ -12,8 +12,16 @@ import {
 } from "./components/Global";
 import "./App.css";
 import { ToDoForm } from "./components/ToDoForm";
-import { FILTER_MAP, ToDo, ToDoItem, ToDoItemProps } from "./components/ToDo";
+import { ToDo, ToDoItem, ToDoItemProps } from "./components/ToDo";
+import { FilterButton } from "./components/FilterButton";
 import { nanoid } from "nanoid";
+
+export const FILTER_MAP: any = {
+  All: () => true,
+  Active: (items: ToDoItemProps) => items.isComplete !== true,
+  Completed: (items: ToDoItemProps) => items.isComplete !== false,
+};
+const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -104,6 +112,14 @@ function App() {
         deleteItem={deleteItem}
       />
     ));
+  const filterButtonList = FILTER_NAMES.map((name) => (
+    <FilterButton
+      key={name}
+      name={name}
+      isPressed={name === filter}
+      filterItems={setFilter}
+    />
+  ));
   return (
     <div className="App">
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
@@ -124,10 +140,10 @@ function App() {
             <ToDoForm addToDoItem={addItem}></ToDoForm>
             <ToDo
               ToDoItem={toDoList}
+              filterButtonList={filterButtonList}
               toggleIsComplete={toggleIsComplete}
               deleteItem={deleteItem}
               itemsLeft={itemsLeftCount}
-              filterItems={setFilter}
               clearAllItems={clearCompletedItems}
             />
           </Container>
