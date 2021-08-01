@@ -30,15 +30,9 @@ function App() {
     theme === "light" ? setTheme("dark") : setTheme("light");
   };
   const toggleIsComplete = (id: string) => {
-    // console.log(items[0]);
     const updatedItems = items.map((item) => {
-      // console.log("item: " + item.name);
       console.log("item: " + item.name + "isComplete: " + item.isComplete);
       if (id === item.id) {
-        // console.log("item: " + item.name + "isComplete: " + item.isComplete);
-        // item.isComplete = !item.isComplete;
-        // console.log("item: " + item.name + "isComplete: " + item.isComplete);
-        // return item;
         if (item.isComplete === true) {
           setItemsLeftCount(itemsLeftCount + 1);
         } else {
