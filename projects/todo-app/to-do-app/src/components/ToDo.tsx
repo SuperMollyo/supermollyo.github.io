@@ -144,9 +144,19 @@ export const ToDoItem = (props: {
   toDoItem: ToDoItemProps;
   toggleIsComplete: (id: string) => void;
   deleteItem: (id: string) => void;
+  onDragStart: (e: React.DragEvent<HTMLLIElement>, index: number) => void;
+  onDragOver: (index: number) => void;
+  onDragEnd: () => void;
+  index: number;
 }) => {
   return (
-    <Li>
+    <Li
+      onDoubleClick={() => console.log("double")}
+      draggable={true}
+      onDragStart={(e) => props.onDragStart(e, props.index)}
+      onDragOver={() => props.onDragOver(props.index)}
+      onDragEnd={() => props.onDragEnd()}
+    >
       <CheckboxRound
         toDoItem={props.toDoItem}
         toggleFunction={props.toggleIsComplete}

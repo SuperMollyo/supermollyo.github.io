@@ -74,6 +74,48 @@ function App() {
     }
   };
   const [itemsLeftCount, setItemsLeftCount] = useState(countItemsLeft);
+  const [draggedItem, setDraggedItem] = useState<ToDoItemProps | undefined>(
+    undefined
+  );
+  interface OnDragStartProps {
+    e: React.DragEvent<HTMLDivElement>;
+    index: number;
+    //   toDoItems: ToDoItemProps[];
+  }
+  const onDragStart = (e: React.DragEvent<HTMLLIElement>, index: number) => {
+    console.log("onDragStart");
+    e.dataTransfer.effectAllowed = "move";
+
+    setDraggedItem(items[index]);
+    if (draggedItem !== undefined)
+      console.log("draggedItem index: " + draggedItem.name);
+    // let eTarget: EventTarget | null = props.e.target;
+    const id = (e.target as HTMLDivElement).id;
+    e.dataTransfer.setData("text/html", id);
+  };
+
+  const onDragOver = (index: number) => {
+    // console.log("onDragOver");
+    const draggedOverItem = items[index];
+
+    // if the item is dragged over itself, ignore
+    if (draggedItem === draggedOverItem) {
+      return;
+    }
+
+    // filter out the currently dragged item
+    let newItems = items.filter((item) => item !== draggedItem);
+
+    // add the dragged item after the dragged over item
+    if (draggedItem !== undefined) newItems.splice(index, 0, draggedItem);
+
+    setItems(newItems);
+  };
+  const onDragEnd = () => {
+    // this.draggedIdx = null;
+    setDraggedItem(undefined);
+    console.log("onDragEnd");
+  };
   const addItem = (name: string) => {
     const newItem: ToDoItemProps = {
       id: "todo-" + nanoid(),
@@ -96,12 +138,16 @@ function App() {
   };
   const toDoList = items
     .filter(FILTER_MAP[filter])
-    .map((toDoItem: ToDoItemProps) => (
+    .map((toDoItem: ToDoItemProps, index: number) => (
       <ToDoItem
         key={toDoItem.id}
         toDoItem={toDoItem}
         toggleIsComplete={toggleIsComplete}
         deleteItem={deleteItem}
+        index={index}
+        onDragStart={onDragStart}
+        onDragOver={onDragOver}
+        onDragEnd={onDragEnd}
       />
     ));
   return (
