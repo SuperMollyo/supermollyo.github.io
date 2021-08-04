@@ -12,9 +12,17 @@ import {
 } from "./components/Global";
 import "./App.css";
 import { ToDoForm } from "./components/ToDoForm";
-import { FILTER_MAP, ToDo, ToDoItem, ToDoItemProps } from "./components/ToDo";
+import { ToDo, ToDoItem, ToDoItemProps } from "./components/ToDo";
+import { FilterButton } from "./components/FilterButton";
 import { nanoid } from "nanoid";
 import { color } from "./styles/StyleTokens";
+
+export const FILTER_MAP: any = {
+  All: () => true,
+  Active: (items: ToDoItemProps) => items.isComplete !== true,
+  Completed: (items: ToDoItemProps) => items.isComplete !== false,
+};
+const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -23,15 +31,9 @@ function App() {
     theme === "light" ? setTheme("dark") : setTheme("light");
   };
   const toggleIsComplete = (id: string) => {
-    // console.log(items[0]);
     const updatedItems = items.map((item) => {
-      // console.log("item: " + item.name);
       console.log("item: " + item.name + "isComplete: " + item.isComplete);
       if (id === item.id) {
-        // console.log("item: " + item.name + "isComplete: " + item.isComplete);
-        // item.isComplete = !item.isComplete;
-        // console.log("item: " + item.name + "isComplete: " + item.isComplete);
-        // return item;
         if (item.isComplete === true) {
           setItemsLeftCount(itemsLeftCount + 1);
         } else {
@@ -169,6 +171,14 @@ function App() {
         onDrop={onDrop}
       />
     ));
+  const filterButtonList = FILTER_NAMES.map((name) => (
+    <FilterButton
+      key={name}
+      name={name}
+      isPressed={name === filter}
+      filterItems={setFilter}
+    />
+  ));
   return (
     <div className="App">
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
@@ -189,10 +199,10 @@ function App() {
             <ToDoForm addToDoItem={addItem}></ToDoForm>
             <ToDo
               ToDoItem={toDoList}
+              filterButtonList={filterButtonList}
               toggleIsComplete={toggleIsComplete}
               deleteItem={deleteItem}
               itemsLeft={itemsLeftCount}
-              filterItems={setFilter}
               clearAllItems={clearCompletedItems}
             />
           </Container>
