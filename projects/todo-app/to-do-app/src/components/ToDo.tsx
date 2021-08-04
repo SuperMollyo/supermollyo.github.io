@@ -131,6 +131,7 @@ export const Li = styled.li`
   height: 25px;
   border-bottom: 1px solid ${(props) => props.theme.borderColor};
   padding: 20px;
+  transition: 1s;
   &:first-child {
     border-top: none;
   }
