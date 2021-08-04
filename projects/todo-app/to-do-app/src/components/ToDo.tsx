@@ -132,6 +132,7 @@ export const Li = styled.li`
   border-bottom: 1px solid ${(props) => props.theme.borderColor};
   padding: 20px;
   transition: 1s;
+  cursor: grab;
   &:first-child {
     border-top: none;
   }
@@ -149,6 +150,7 @@ export const ToDoItem = (props: {
   onDragOver: (e: React.DragEvent<HTMLLIElement>, index: number) => void;
   onDragLeave: (e: React.DragEvent<HTMLLIElement>, index: number) => void;
   onDrop: (e: React.DragEvent<HTMLLIElement>, index: number) => void;
+  onDragEnd: (e: React.DragEvent<HTMLLIElement>) => void;
   index: number;
 }) => {
   return (
@@ -160,6 +162,7 @@ export const ToDoItem = (props: {
       onDragOver={(e) => props.onDragOver(e, props.index)}
       onDragLeave={(e) => props.onDragLeave(e, props.index)}
       onDrop={(e) => props.onDrop(e, props.index)}
+      onDragEnd={(e) => props.onDragEnd(e)}
     >
       <CheckboxRound
         toDoItem={props.toDoItem}

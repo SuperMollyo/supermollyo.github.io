@@ -92,6 +92,7 @@ function App() {
     setDraggedItem(items[index]);
     if (draggedItem !== undefined)
       console.log("draggedItem index: " + draggedItem.name);
+    (e.target as HTMLElement).style.cursor = "grabbing";
     // let eTarget: EventTarget | null = props.e.target;
     const id = (e.target as HTMLDivElement).id;
     e.dataTransfer.setData("text/html", id);
@@ -135,6 +136,9 @@ function App() {
     console.log("onDragEnd0000");
     // event.preventDefault();
   };
+  const onDragEnd = (e: React.DragEvent<HTMLLIElement>) => {
+    (e.target as HTMLElement).style.cursor = "grab";
+  };
   const addItem = (name: string) => {
     const newItem: ToDoItemProps = {
       id: "todo-" + nanoid(),
@@ -169,6 +173,7 @@ function App() {
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
         onDrop={onDrop}
+        onDragEnd={onDragEnd}
       />
     ));
   const filterButtonList = FILTER_NAMES.map((name) => (
