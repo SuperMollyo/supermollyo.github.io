@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import iconCheck from "../images/icon-check.svg";
 import iconX from "../images/icon-cross.svg";
+import iconDrag from "../images/icon-drag.svg";
 import { borderRadius, color, font, gradient } from "../styles/StyleTokens";
 import { RowSpaceBetween } from "./Global";
 export const LabelRound = styled.label`
@@ -79,6 +80,33 @@ export interface ToDoItemProps {
   isComplete: boolean;
   id: string;
 }
+export const ButtonDrag = styled.button`
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: ${(props) => props.theme.backgroundColorContainer};
+  cursor: grab;
+  transition: 0.5s;
+  background-image: url(${iconDrag});
+  background-repeat: no-repeat;
+  width: 36px;
+  height: 36px;
+  background-size: 20px;
+  position: absolute;
+  right: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  background-position: center;
+  &:hover {
+    background-color: ${(props) => props.theme.fontColorPrimary};
+  }
+  @media (max-width: 576px) {
+    width: 26px;
+    height: 26px;
+    right: -20px;
+    background-size: 15px;
+  }
+`;
 export const ButtonDelete = styled.button`
   border: none;
   background: none;
@@ -126,6 +154,7 @@ export const Ul = styled.ul`
   padding: 0;
 `;
 export const Li = styled.li`
+  position: relative;
   display: flex;
   justify-content: space-between;
   height: 25px;
@@ -172,6 +201,7 @@ export const ToDoItem = (props: {
         type="button"
         onClick={() => props.deleteItem(props.toDoItem.id)}
       ></ButtonDelete>
+      <ButtonDrag type="button"></ButtonDrag>
     </Li>
   );
 };
