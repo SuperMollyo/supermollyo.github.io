@@ -14,6 +14,7 @@ import "./App.css";
 import { ToDoForm } from "./components/ToDoForm";
 import { FILTER_MAP, ToDo, ToDoItem, ToDoItemProps } from "./components/ToDo";
 import { nanoid } from "nanoid";
+import { color } from "./styles/StyleTokens";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -94,10 +95,28 @@ function App() {
     e.dataTransfer.setData("text/html", id);
   };
 
-  const onDragOver = (index: number) => {
+  const onDragOver = (e: React.DragEvent<HTMLLIElement>, index: number) => {
     // console.log("onDragOver");
+    e.preventDefault();
     const draggedOverItem = items[index];
 
+    // if the item is dragged over itself, ignore
+    if (draggedItem === draggedOverItem) {
+      return;
+    }
+  };
+  const onDragEnter = (e: React.DragEvent<HTMLLIElement>, index: number) => {
+    console.log("onDragEnter");
+    (e.target as HTMLElement).style.outline = `dotted 1px ${color.brightBlue}`;
+  };
+  const onDragLeave = (e: React.DragEvent<HTMLLIElement>, index: number) => {
+    console.log("onDragLeave");
+    (e.target as HTMLElement).style.outline = "none";
+  };
+  const onDrop = (e: React.DragEvent<HTMLLIElement>, index: number) => {
+    // this.draggedIdx = null;
+    const draggedOverItem = items[index];
+    (e.target as HTMLElement).style.outline = "none";
     // if the item is dragged over itself, ignore
     if (draggedItem === draggedOverItem) {
       return;
@@ -110,11 +129,9 @@ function App() {
     if (draggedItem !== undefined) newItems.splice(index, 0, draggedItem);
 
     setItems(newItems);
-  };
-  const onDragEnd = () => {
-    // this.draggedIdx = null;
-    setDraggedItem(undefined);
-    console.log("onDragEnd");
+    // setDraggedItem(null);
+    console.log("onDragEnd0000");
+    // event.preventDefault();
   };
   const addItem = (name: string) => {
     const newItem: ToDoItemProps = {
@@ -146,8 +163,10 @@ function App() {
         deleteItem={deleteItem}
         index={index}
         onDragStart={onDragStart}
+        onDragEnter={onDragEnter}
         onDragOver={onDragOver}
-        onDragEnd={onDragEnd}
+        onDragLeave={onDragLeave}
+        onDrop={onDrop}
       />
     ));
   return (
