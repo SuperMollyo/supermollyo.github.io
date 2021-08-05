@@ -37,6 +37,7 @@ export const InputCheckBox = styled.input.attrs({ type: "checkbox" })`
     background: ${(props) => props.theme.backgroundColorContainer};
     border-radius: 100%;
     border: 1px solid ${(props) => props.theme.borderColor};
+    vertical-align: middle;
     @media (max-width: 576px) {
       width: 20px;
       height: 20px;
@@ -156,6 +157,7 @@ export const ButtonDelete = styled.button`
   transition: 0.5s;
   background-image: url(${iconX});
   background-repeat: no-repeat;
+  background-position: center;
   width: 26px;
   height: 26px;
   &:hover {
