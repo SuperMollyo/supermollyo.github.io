@@ -123,7 +123,7 @@ export const ButtonDrag = styled.button`
 export const DragDiv = styled.div`
   border: 1px solid transparent;
   border-radius: 5px;
-  background: ${(props) => props.theme.backgroundColorContainer};
+  background-color: ${(props) => props.theme.backgroundColorContainer};
   cursor: grab;
   transition: 0.5s;
   background-image: url(${iconDrag});
@@ -137,6 +137,9 @@ export const DragDiv = styled.div`
   transform: translateY(-50%);
   background-position: center;
   &:hover {
+    filter: drop-shadow(2px 1px 1px ${(props) => props.theme.fontColorPrimary});
+  }
+  &:active {
     background-color: ${(props) => props.theme.fontColorPrimary};
   }
   @media (max-width: 576px) {
@@ -150,13 +153,13 @@ export const ButtonDelete = styled.button`
   border: none;
   background: none;
   cursor: pointer;
-  transition: 1s;
+  transition: 0.5s;
   background-image: url(${iconX});
   background-repeat: no-repeat;
   width: 26px;
   height: 26px;
   &:hover {
-    filter: drop-shadow(2px 2px 3px black);
+    filter: drop-shadow(2px 1px 1px ${(props) => props.theme.fontColorPrimary});
     transform: scale(1.1);
   }
   @media (max-width: 576px) {
