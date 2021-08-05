@@ -5,7 +5,7 @@ import { borderRadius, color, font } from "../styles/StyleTokens";
 export const InputContainer = styled.div`
   display: grid;
   grid-template-columns: 40px 1fr;
-  grid-gap: 24px;
+  grid-gap: 29px;
   height: 64px;
   width: 100%;
   margin-top: 25px;
@@ -18,6 +18,7 @@ export const InputContainer = styled.div`
     height: 48px;
     margin-top: 16px;
     margin-bottom: 10px;
+    grid-gap: 8px;
   }
 `;
 export const CircleIcon = styled.div`
@@ -28,6 +29,11 @@ export const CircleIcon = styled.div`
   background: ${(props) => props.theme.backgroundColorContainer};
   border-radius: 100%;
   border: 1px solid ${(props) => props.theme.borderColor};
+  @media (max-width: 576px) {
+    width: 20px;
+    height: 20px;
+    margin-left: 14px;
+  }
 `;
 export const InputTextBox = styled.input.attrs({ type: "text" })`
   padding: 0;

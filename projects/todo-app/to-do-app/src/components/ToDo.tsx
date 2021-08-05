@@ -41,6 +41,7 @@ export const InputCheckBox = styled.input.attrs({ type: "checkbox" })`
     @media (max-width: 576px) {
       width: 20px;
       height: 20px;
+      margin-right: 12px;
     }
   }
   & + ${LabelRound}:hover::before {
