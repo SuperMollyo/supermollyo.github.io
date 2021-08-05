@@ -95,7 +95,7 @@ export const ButtonThemeToggle = styled.button`
 `;
 export const InstructionText = styled.p`
   color: ${(props) => props.theme.fontColorSecondary};
-  margin-top: 50px;
+  margin: 50px 0;
   font-size: ${font.size.secondary};
   text-align: center;
   @media (max-width: 576px) {
