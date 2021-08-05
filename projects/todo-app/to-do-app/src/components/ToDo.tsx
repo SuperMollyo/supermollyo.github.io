@@ -186,7 +186,7 @@ export const CheckboxRound = (props: {
     </div>
   );
 };
-export const ToDoContainer = styled.ul`
+export const ToDoContainer = styled.div`
   background: ${(props) => props.theme.backgroundColorContainer};
   border-radius: ${borderRadius.default};
   padding: 0;
