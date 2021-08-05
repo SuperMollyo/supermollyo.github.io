@@ -80,6 +80,20 @@ export interface ToDoItemProps {
   isComplete: boolean;
   id: string;
 }
+export const DragContainer = styled.div`
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  right: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  @media (max-width: 576px) {
+    width: 26px;
+    height: 26px;
+    right: -20px;
+    background-size: 15px;
+  }
+`;
 export const ButtonDrag = styled.button`
   border: 1px solid transparent;
   border-radius: 5px;
@@ -91,11 +105,10 @@ export const ButtonDrag = styled.button`
   width: 36px;
   height: 36px;
   background-size: 20px;
-  position: absolute;
-  right: -30px;
-  top: 50%;
-  transform: translateY(-50%);
-  position: absolute;
+  /* position: absolute; */
+  /* right: -30px; */
+  /* top: 50%;
+  transform: translateY(-50%); */
   background-position: center;
   &:hover {
     background-color: ${(props) => props.theme.fontColorPrimary};
@@ -103,7 +116,33 @@ export const ButtonDrag = styled.button`
   @media (max-width: 576px) {
     width: 26px;
     height: 26px;
-    right: -20px;
+    /* right: -20px; */
+    background-size: 15px;
+  }
+`;
+export const DragDiv = styled.div`
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: ${(props) => props.theme.backgroundColorContainer};
+  cursor: grab;
+  transition: 0.5s;
+  background-image: url(${iconDrag});
+  background-repeat: no-repeat;
+  width: 36px;
+  height: 36px;
+  background-size: 20px;
+  position: absolute;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-position: center;
+  &:hover {
+    background-color: ${(props) => props.theme.fontColorPrimary};
+  }
+  @media (max-width: 576px) {
+    width: 26px;
+    height: 38px;
+    left: -20px;
     background-size: 15px;
   }
 `;
@@ -160,8 +199,8 @@ export const Li = styled.li`
   height: 25px;
   border-bottom: 1px solid ${(props) => props.theme.borderColor};
   padding: 20px;
-  transition: 1s;
-  cursor: grab;
+  transition: 0.5s;
+  cursor: pointer;
   &:first-child {
     border-top: none;
   }
@@ -174,34 +213,64 @@ export const ToDoItem = (props: {
   toDoItem: ToDoItemProps;
   toggleIsComplete: (id: string) => void;
   deleteItem: (id: string) => void;
-  onDragStart: (e: React.DragEvent<HTMLLIElement>, index: number) => void;
-  onDragEnter: (e: React.DragEvent<HTMLLIElement>, index: number) => void;
-  onDragOver: (e: React.DragEvent<HTMLLIElement>, index: number) => void;
-  onDragLeave: (e: React.DragEvent<HTMLLIElement>, index: number) => void;
-  onDrop: (e: React.DragEvent<HTMLLIElement>, index: number) => void;
-  onDragEnd: (e: React.DragEvent<HTMLLIElement>) => void;
+  onDragStart: (e: React.DragEvent<HTMLElement>, index: number) => void;
+  onDragEnter: (e: React.DragEvent<HTMLElement>, index: number) => void;
+  onDragOver: (e: React.DragEvent<HTMLElement>, index: number) => void;
+  onDragLeave: (e: React.DragEvent<HTMLElement>, index: number) => void;
+  onDrop: (e: React.DragEvent<HTMLElement>, index: number) => void;
+  onDragEnd: (e: React.DragEvent<HTMLElement>) => void;
   index: number;
 }) => {
   return (
     <Li
       onDoubleClick={() => console.log("double")}
-      draggable={true}
-      onDragStart={(e) => props.onDragStart(e, props.index)}
-      onDragEnter={(e) => props.onDragEnter(e, props.index)}
-      onDragOver={(e) => props.onDragOver(e, props.index)}
-      onDragLeave={(e) => props.onDragLeave(e, props.index)}
-      onDrop={(e) => props.onDrop(e, props.index)}
-      onDragEnd={(e) => props.onDragEnd(e)}
+      //   draggable={true}
+      //   onDragStart={(e) => props.onDragStart(e, props.index)}
+      //   onDragEnter={(e) => props.onDragEnter(e, props.index)}
+      //   onDragOver={(e) => props.onDragOver(e, props.index)}
+      //   onDragLeave={(e) => props.onDragLeave(e, props.index)}
+      //   onDrop={(e) => props.onDrop(e, props.index)}
+      //   onDragEnd={(e) => props.onDragEnd(e)}
     >
       <CheckboxRound
         toDoItem={props.toDoItem}
         toggleFunction={props.toggleIsComplete}
       />
+
       <ButtonDelete
         type="button"
         onClick={() => props.deleteItem(props.toDoItem.id)}
       ></ButtonDelete>
-      <ButtonDrag type="button"></ButtonDrag>
+      {/* <DragContainer
+        draggable={true}
+        onDragStart={(e) => props.onDragStart(e, props.index)}
+        onDragEnter={(e) => props.onDragEnter(e, props.index)}
+        onDragOver={(e) => props.onDragOver(e, props.index)}
+        onDragLeave={(e) => props.onDragLeave(e, props.index)}
+        onDrop={(e) => props.onDrop(e, props.index)}
+        onDragEnd={(e) => props.onDragEnd(e)}
+      >
+        <ButtonDrag type="button"></ButtonDrag>
+      </DragContainer> */}
+      {/* <ButtonDrag
+        type="button"
+        draggable={true}
+        onDragStart={(e) => props.onDragStart(e, props.index)}
+        onDragEnter={(e) => props.onDragEnter(e, props.index)}
+        onDragOver={(e) => props.onDragOver(e, props.index)}
+        onDragLeave={(e) => props.onDragLeave(e, props.index)}
+        onDrop={(e) => props.onDrop(e, props.index)}
+        onDragEnd={(e) => props.onDragEnd(e)}
+      ></ButtonDrag> */}
+      <DragDiv
+        draggable={true}
+        onDragStart={(e) => props.onDragStart(e, props.index)}
+        onDragEnter={(e) => props.onDragEnter(e, props.index)}
+        onDragOver={(e) => props.onDragOver(e, props.index)}
+        onDragLeave={(e) => props.onDragLeave(e, props.index)}
+        onDrop={(e) => props.onDrop(e, props.index)}
+        onDragEnd={(e) => props.onDragEnd(e)}
+      ></DragDiv>
     </Li>
   );
 };

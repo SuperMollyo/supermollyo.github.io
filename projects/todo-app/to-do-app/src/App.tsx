@@ -85,7 +85,7 @@ function App() {
     index: number;
     //   toDoItems: ToDoItemProps[];
   }
-  const onDragStart = (e: React.DragEvent<HTMLLIElement>, index: number) => {
+  const onDragStart = (e: React.DragEvent<HTMLElement>, index: number) => {
     console.log("onDragStart");
     e.dataTransfer.effectAllowed = "move";
 
@@ -93,12 +93,18 @@ function App() {
     if (draggedItem !== undefined)
       console.log("draggedItem index: " + draggedItem.name);
     (e.target as HTMLElement).style.cursor = "grabbing";
-    // let eTarget: EventTarget | null = props.e.target;
-    const id = (e.target as HTMLDivElement).id;
-    e.dataTransfer.setData("text/html", id);
+    if ((e.target as HTMLElement).parentElement !== null) {
+      const parent = (e.target as HTMLElement).parentElement;
+      if (parent !== null) {
+        const id = parent.id;
+        console.log("name: " + parent);
+        e.dataTransfer.setData("text/html", id);
+        e.dataTransfer.setDragImage(parent, 20, 20);
+      }
+    }
   };
 
-  const onDragOver = (e: React.DragEvent<HTMLLIElement>, index: number) => {
+  const onDragOver = (e: React.DragEvent<HTMLElement>, index: number) => {
     // console.log("onDragOver");
     e.preventDefault();
     const draggedOverItem = items[index];
@@ -108,18 +114,30 @@ function App() {
       return;
     }
   };
-  const onDragEnter = (e: React.DragEvent<HTMLLIElement>, index: number) => {
+  const onDragEnter = (e: React.DragEvent<HTMLElement>, index: number) => {
     console.log("onDragEnter");
     (e.target as HTMLElement).style.outline = `dotted 1px ${color.brightBlue}`;
+    if ((e.target as HTMLElement).parentElement !== null) {
+      const parent = (e.target as HTMLElement).parentElement;
+      if (parent !== null)
+        parent.style.outline = `dotted 1px ${color.brightBlue}`;
+    }
   };
-  const onDragLeave = (e: React.DragEvent<HTMLLIElement>, index: number) => {
+  const onDragLeave = (e: React.DragEvent<HTMLElement>, index: number) => {
     console.log("onDragLeave");
     (e.target as HTMLElement).style.outline = "none";
+    if ((e.target as HTMLElement).parentElement !== null) {
+      const parent = (e.target as HTMLElement).parentElement;
+      if (parent !== null) parent.style.outline = "none";
+    }
   };
-  const onDrop = (e: React.DragEvent<HTMLLIElement>, index: number) => {
-    // this.draggedIdx = null;
+  const onDrop = (e: React.DragEvent<HTMLElement>, index: number) => {
     const draggedOverItem = items[index];
     (e.target as HTMLElement).style.outline = "none";
+    if ((e.target as HTMLElement).parentElement !== null) {
+      const parent = (e.target as HTMLElement).parentElement;
+      if (parent !== null) parent.style.outline = "none";
+    }
     // if the item is dragged over itself, ignore
     if (draggedItem === draggedOverItem) {
       return;
@@ -136,7 +154,7 @@ function App() {
     console.log("onDragEnd0000");
     // event.preventDefault();
   };
-  const onDragEnd = (e: React.DragEvent<HTMLLIElement>) => {
+  const onDragEnd = (e: React.DragEvent<HTMLElement>) => {
     (e.target as HTMLElement).style.cursor = "grab";
   };
   const addItem = (name: string) => {
