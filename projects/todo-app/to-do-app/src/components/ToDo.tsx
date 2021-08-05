@@ -246,6 +246,7 @@ export const ToDoItem = (props: {
       <ButtonDelete
         type="button"
         onClick={() => props.deleteItem(props.toDoItem.id)}
+        aria-label="Delete Item"
       ></ButtonDelete>
       {/* <DragContainer
         draggable={true}
@@ -332,9 +333,7 @@ export const ToDo = (props: ToDoProps) => {
 
   return (
     <ToDoContainer>
-      <Ul role="list" aria-labelledby="list-heading">
-        {props.ToDoItem}
-      </Ul>
+      <Ul role="list">{props.ToDoItem}</Ul>
       <ToDoDisplayPanel>
         <RowSpaceBetween>
           <ItemCountDisplay>

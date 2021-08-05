@@ -215,6 +215,7 @@ function App() {
                 <H1>ToDo</H1>
                 <ButtonThemeToggle
                   onClick={() => themeToggler()}
+                  aria-label="Toggle Theme Color"
                 ></ButtonThemeToggle>
               </RowSpaceBetween>
             </Container>
