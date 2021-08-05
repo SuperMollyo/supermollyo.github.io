@@ -16,7 +16,6 @@ export const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme }>`
 	}
   button {
     font-family: ${font.family.default}, sans-serif;
-    /* font-size: ${font.size.default}; */
     cursor: pointer;
     @media (max-width: 576px) {
       font-size: ${font.size.mobileDefault};
@@ -93,4 +92,10 @@ export const ButtonThemeToggle = styled.button`
     filter: drop-shadow(0px 0px 5px white);
     transform: scale(1.1);
   }
+`;
+export const InstructionText = styled.p`
+  color: ${(props) => props.theme.fontColorSecondary};
+  margin-top: 50px;
+  font-size: ${font.size.secondary};
+  text-align: center;
 `;

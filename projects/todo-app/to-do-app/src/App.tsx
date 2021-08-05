@@ -9,6 +9,7 @@ import {
   RowSpaceBetween,
   ButtonThemeToggle,
   Header,
+  InstructionText,
 } from "./components/Global";
 import "./App.css";
 import { ToDoForm } from "./components/ToDoForm";
@@ -228,6 +229,9 @@ function App() {
               itemsLeft={itemsLeftCount}
               clearAllItems={clearCompletedItems}
             />
+            <InstructionText>
+              Drag and drop the left-side item buttons to reorder the list.
+            </InstructionText>
           </Container>
         </main>
       </ThemeProvider>
