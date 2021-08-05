@@ -23,12 +23,13 @@ export const InputContainer = styled.div`
 `;
 export const CircleIcon = styled.div`
   margin-left: 20px;
-  /* margin-right: 24px; */
+  z-index: 1;
   width: 24px;
   height: 24px;
   background: ${(props) => props.theme.backgroundColorContainer};
   border-radius: 100%;
   border: 1px solid ${(props) => props.theme.borderColor};
+  pointer-events: none;
   @media (max-width: 576px) {
     width: 20px;
     height: 20px;
@@ -37,42 +38,40 @@ export const CircleIcon = styled.div`
 `;
 export const InputTextBox = styled.input.attrs({ type: "text" })`
   padding: 0;
-  border: none;
+  border: 1px solid transparent;
+  border-radius: ${borderRadius.default};
   font-family: ${font.family.default}, sans-serif;
   font-size: ${font.size.default};
   color: ${({ theme }) => theme.fontColorDefault};
   background: ${(props) => props.theme.backgroundColorContainer};
   width: 100%;
   height: 100%;
+  margin-left: -70px;
+  padding-left: 70px;
   &::placeholder {
     color: ${color.darkGrayishBlue};
   }
   &:focus-visible {
-    border: none;
     outline: none;
-    filter: drop-shadow(
-      0px 1px 8px ${(props) => props.theme.backgroundColorContainer}
-    );
-    background: linear-gradient(
-      45deg,
-      ${(props) => props.theme.backgroundColorContainer},
-      transparent,
-      #626de13b
-    );
+    border: 1px solid ${(props) => props.theme.fontColorPrimary};
+    border-radius: ${borderRadius.default};
+    filter: drop-shadow(1px 1px 2px ${(props) => props.theme.fontColorPrimary});
+  }
+  &:focus {
+    outline: none;
+    border: 1px solid ${(props) => props.theme.fontColorPrimary};
+    border-radius: ${borderRadius.default};
+    filter: drop-shadow(1px 1px 2px ${(props) => props.theme.fontColorPrimary});
   }
   &:hover {
-    filter: drop-shadow(
-      0px 1px 8px ${(props) => props.theme.backgroundColorContainer}
-    );
-    background: linear-gradient(
-      45deg,
-      ${(props) => props.theme.backgroundColorContainer},
-      transparent,
-      #626de13b
-    );
+    filter: drop-shadow(1px 1px 2px ${(props) => props.theme.fontColorPrimary});
+    border: 1px solid transparent;
+    border-radius: ${borderRadius.default};
   }
   @media (max-width: 576px) {
     font-size: ${font.size.mobileDefault};
+    margin-left: -50px;
+    padding-left: 50px;
   }
 `;
 export interface ToDoFormProps {
