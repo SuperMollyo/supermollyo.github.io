@@ -98,4 +98,7 @@ export const InstructionText = styled.p`
   margin-top: 50px;
   font-size: ${font.size.secondary};
   text-align: center;
+  @media (max-width: 576px) {
+    margin-top: 100px;
+  }
 `;

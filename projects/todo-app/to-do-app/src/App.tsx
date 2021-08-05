@@ -230,7 +230,7 @@ function App() {
               clearAllItems={clearCompletedItems}
             />
             <InstructionText>
-              Drag and drop the left-side item buttons to reorder the list.
+              Drag and drop the left-side handle buttons to reorder the list.
             </InstructionText>
           </Container>
         </main>
