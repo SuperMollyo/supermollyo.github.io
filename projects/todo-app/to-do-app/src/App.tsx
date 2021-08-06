@@ -13,7 +13,8 @@ import {
 } from "./components/Global";
 import "./App.css";
 import { ToDoForm } from "./components/ToDo/ToDoForm";
-import { ToDo, ToDoItem, ToDoItemProps } from "./components/ToDo/ToDo";
+import { ToDoMain } from "./components/ToDo/ToDoMain";
+import { ToDoItem, ToDoItemProps } from "./components/ToDo/ToDoItem";
 import { FilterButton } from "./components/ToDo/FilterButton";
 import { nanoid } from "nanoid";
 import { color } from "./styles/StyleTokens";
@@ -215,14 +216,14 @@ function App() {
                 <H1>ToDo</H1>
                 <ButtonThemeToggle
                   onClick={() => themeToggler()}
-                  aria-label="Toggle Theme Color"
+                  aria-label="ToggleTheme Color"
                 ></ButtonThemeToggle>
               </RowSpaceBetween>
             </Container>
           </Header>
           <Container>
             <ToDoForm addToDoItem={addItem}></ToDoForm>
-            <ToDo
+            <ToDoMain
               ToDoItem={toDoList}
               filterButtonList={filterButtonList}
               toggleIsComplete={toggleIsComplete}

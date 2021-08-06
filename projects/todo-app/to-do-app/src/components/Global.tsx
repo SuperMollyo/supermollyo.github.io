@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { DefaultTheme } from "styled-components";
 import { createGlobalStyle } from "styled-components";
-import { font } from "../styles/StyleTokens";
+import { borderRadius, font } from "../styles/StyleTokens";
 
 export const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme }>`
 	body {
@@ -91,6 +91,28 @@ export const ButtonThemeToggle = styled.button`
   &:hover {
     filter: drop-shadow(0px 0px 5px white);
     transform: scale(1.1);
+  }
+`;
+export const Ul = styled.ul`
+  background: ${(props) => props.theme.backgroundColorContainer};
+  border-radius: ${borderRadius.default};
+  padding: 0;
+`;
+export const Li = styled.li`
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  height: 25px;
+  border-bottom: 1px solid ${(props) => props.theme.borderColor};
+  padding: 20px;
+  transition: 0.5s;
+  cursor: pointer;
+  &:first-child {
+    border-top: none;
+  }
+  @media (max-width: 576px) {
+    height: 22px;
+    padding: 15px;
   }
 `;
 export const InstructionText = styled.p`
