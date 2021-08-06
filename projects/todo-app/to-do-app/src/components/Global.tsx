@@ -1,4 +1,3 @@
-import React from "react";
 import styled, { DefaultTheme } from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import { borderRadius, font } from "../styles/StyleTokens";

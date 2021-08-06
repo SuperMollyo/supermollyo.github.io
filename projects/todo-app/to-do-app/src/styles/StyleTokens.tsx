@@ -1,6 +1,3 @@
-import React from "react";
-import styled from "styled-components";
-
 export const color = {
   brightBlue: `hsl(220, 98%, 61%)`,
   //Light Theme

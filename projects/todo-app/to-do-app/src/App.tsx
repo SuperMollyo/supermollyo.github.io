@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled, { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./styles/Themes";
 import {
   GlobalStyle,
@@ -82,11 +82,7 @@ function App() {
   const [draggedItem, setDraggedItem] = useState<ToDoItemProps | undefined>(
     undefined
   );
-  interface OnDragStartProps {
-    e: React.DragEvent<HTMLDivElement>;
-    index: number;
-    //   toDoItems: ToDoItemProps[];
-  }
+
   const onDragStart = (e: React.DragEvent<HTMLElement>, index: number) => {
     console.log("onDragStart");
     e.dataTransfer.effectAllowed = "move";
@@ -107,7 +103,6 @@ function App() {
   };
 
   const onDragOver = (e: React.DragEvent<HTMLElement>, index: number) => {
-    // console.log("onDragOver");
     e.preventDefault();
     const draggedOverItem = items[index];
 

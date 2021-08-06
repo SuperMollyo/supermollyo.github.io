@@ -1,6 +1,4 @@
-import React from "react";
-import styled from "styled-components";
-import { color, gradient } from "./StyleTokens";
+import { color } from "./StyleTokens";
 import { DefaultTheme } from "styled-components";
 import bgLightDesktop from "../images/bg-desktop-light.jpg";
 import bgLightMobile from "../images/bg-mobile-light.jpg";
