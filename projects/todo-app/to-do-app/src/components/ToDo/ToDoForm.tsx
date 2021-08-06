@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { borderRadius, color, font } from "../styles/StyleTokens";
+import { borderRadius, color, font } from "../../styles/StyleTokens";
 
 export const InputContainer = styled.div`
   display: grid;

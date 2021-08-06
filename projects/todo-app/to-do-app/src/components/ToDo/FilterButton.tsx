@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { font, color } from "../styles/StyleTokens";
+import { font, color } from "../../styles/StyleTokens";
 export const ButtonFilterAction = styled.button`
   background: none;
   border: none;

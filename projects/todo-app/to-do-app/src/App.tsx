@@ -12,9 +12,9 @@ import {
   InstructionText,
 } from "./components/Global";
 import "./App.css";
-import { ToDoForm } from "./components/ToDoForm";
-import { ToDo, ToDoItem, ToDoItemProps } from "./components/ToDo";
-import { FilterButton } from "./components/FilterButton";
+import { ToDoForm } from "./components/ToDo/ToDoForm";
+import { ToDo, ToDoItem, ToDoItemProps } from "./components/ToDo/ToDo";
+import { FilterButton } from "./components/ToDo/FilterButton";
 import { nanoid } from "nanoid";
 import { color } from "./styles/StyleTokens";
 

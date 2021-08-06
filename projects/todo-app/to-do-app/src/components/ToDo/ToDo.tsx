@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import iconCheck from "../images/icon-check.svg";
-import iconX from "../images/icon-cross.svg";
-import iconDrag from "../images/icon-drag.svg";
-import { borderRadius, color, font, gradient } from "../styles/StyleTokens";
-import { RowSpaceBetween } from "./Global";
+import iconCheck from "../../images/icon-check.svg";
+import iconX from "../../images/icon-cross.svg";
+import iconDrag from "../../images/icon-drag.svg";
+import { RowSpaceBetween } from "../Global";
+import { borderRadius, font, gradient } from "../../styles/StyleTokens";
+
 export const LabelRound = styled.label`
   cursor: pointer;
   color: ${(props) => props.theme.fontColorDefault};
@@ -14,18 +15,12 @@ export const LabelRound = styled.label`
   }
 `;
 export const InputCheckBox = styled.input.attrs({ type: "checkbox" })`
-  /* visibility: hidden; */
   position: absolute;
   height: 0px;
   width: 0px;
   overflow: hidden;
   clip: rect(1px 1px 1px 1px);
   margin: 0;
-  /* & + ${LabelRound} {
-    display: block;
-    position: relative;
-    padding: 0 1.5rem;
-  } */
   & + ${LabelRound}::before {
     content: "";
     cursor: pointer;
@@ -107,10 +102,6 @@ export const ButtonDrag = styled.button`
   width: 36px;
   height: 36px;
   background-size: 20px;
-  /* position: absolute; */
-  /* right: -30px; */
-  /* top: 50%;
-  transform: translateY(-50%); */
   background-position: center;
   &:hover {
     background-color: ${(props) => props.theme.fontColorPrimary};
@@ -118,7 +109,6 @@ export const ButtonDrag = styled.button`
   @media (max-width: 576px) {
     width: 26px;
     height: 26px;
-    /* right: -20px; */
     background-size: 15px;
   }
 `;
@@ -228,16 +218,7 @@ export const ToDoItem = (props: {
   index: number;
 }) => {
   return (
-    <Li
-      onDoubleClick={() => console.log("double")}
-      //   draggable={true}
-      //   onDragStart={(e) => props.onDragStart(e, props.index)}
-      //   onDragEnter={(e) => props.onDragEnter(e, props.index)}
-      //   onDragOver={(e) => props.onDragOver(e, props.index)}
-      //   onDragLeave={(e) => props.onDragLeave(e, props.index)}
-      //   onDrop={(e) => props.onDrop(e, props.index)}
-      //   onDragEnd={(e) => props.onDragEnd(e)}
-    >
+    <Li onDoubleClick={() => console.log("double")}>
       <CheckboxRound
         toDoItem={props.toDoItem}
         toggleFunction={props.toggleIsComplete}
@@ -248,27 +229,6 @@ export const ToDoItem = (props: {
         onClick={() => props.deleteItem(props.toDoItem.id)}
         aria-label="Delete Item"
       ></ButtonDelete>
-      {/* <DragContainer
-        draggable={true}
-        onDragStart={(e) => props.onDragStart(e, props.index)}
-        onDragEnter={(e) => props.onDragEnter(e, props.index)}
-        onDragOver={(e) => props.onDragOver(e, props.index)}
-        onDragLeave={(e) => props.onDragLeave(e, props.index)}
-        onDrop={(e) => props.onDrop(e, props.index)}
-        onDragEnd={(e) => props.onDragEnd(e)}
-      >
-        <ButtonDrag type="button"></ButtonDrag>
-      </DragContainer> */}
-      {/* <ButtonDrag
-        type="button"
-        draggable={true}
-        onDragStart={(e) => props.onDragStart(e, props.index)}
-        onDragEnter={(e) => props.onDragEnter(e, props.index)}
-        onDragOver={(e) => props.onDragOver(e, props.index)}
-        onDragLeave={(e) => props.onDragLeave(e, props.index)}
-        onDrop={(e) => props.onDrop(e, props.index)}
-        onDragEnd={(e) => props.onDragEnd(e)}
-      ></ButtonDrag> */}
       <DragDiv
         draggable={true}
         onDragStart={(e) => props.onDragStart(e, props.index)}
