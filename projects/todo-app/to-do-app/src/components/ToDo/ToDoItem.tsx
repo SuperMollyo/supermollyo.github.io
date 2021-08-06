@@ -73,7 +73,7 @@ export const ToDoItem = (props: {
   index: number;
 }) => {
   return (
-    <Li onDoubleClick={() => console.log("double")}>
+    <Li>
       <RoundCheckbox
         toDoItem={props.toDoItem}
         toggleFunction={props.toggleIsComplete}
