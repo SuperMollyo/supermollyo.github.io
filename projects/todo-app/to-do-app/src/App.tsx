@@ -66,7 +66,7 @@ function App() {
   const [filter, setFilter] = useState("All");
   const countItemsLeft = () => {
     let count = 0;
-    items.map((item) => {
+    items.forEach((item) => {
       if (item.isComplete === false) {
         count++;
       }
