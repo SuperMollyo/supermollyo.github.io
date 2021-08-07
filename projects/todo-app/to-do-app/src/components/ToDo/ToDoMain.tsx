@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { borderRadius } from "../../styles/StyleTokens";
-import { Ul } from "../Global";
+import { Ol } from "../Global";
 import { ToDoDisplayPanel } from "./ToDoDisplayPanel";
 
 export const ContainerToDo = styled.div`
@@ -20,7 +20,7 @@ export interface ToDoProps {
 export const ToDoMain = (props: ToDoProps) => {
   return (
     <ContainerToDo>
-      <Ul role="list">{props.ToDoItem}</Ul>
+      <Ol role="listbox">{props.ToDoItem}</Ol>
       <ToDoDisplayPanel
         filterButtonList={props.filterButtonList}
         itemsLeft={props.itemsLeft}

@@ -21,7 +21,19 @@ export const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme }>`
     }
   }
 `;
-
+export const TextAssistive = styled.span`
+  position: absolute;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+`;
+export const AssistiveLiveText = (announcement: string) => {
+  return <TextAssistive aria-live="assertive">{announcement}</TextAssistive>;
+};
 export const H1 = styled.h1`
   font-size: ${font.size.h1};
   color: white;
@@ -92,7 +104,7 @@ export const ButtonThemeToggle = styled.button`
     transform: scale(1.1);
   }
 `;
-export const Ul = styled.ul`
+export const Ol = styled.ol`
   background: ${(props) => props.theme.backgroundColorContainer};
   border-radius: ${borderRadius.default};
   padding: 0;

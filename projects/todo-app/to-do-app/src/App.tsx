@@ -10,6 +10,8 @@ import {
   ButtonThemeToggle,
   Header,
   InstructionText,
+  TextAssistive,
+  AssistiveLiveText,
 } from "./components/Global";
 import "./App.css";
 import { ToDoForm } from "./components/ToDo/ToDoForm";
@@ -25,7 +27,7 @@ export const FILTER_MAP: any = {
   Completed: (items: ToDoItemProps) => items.isComplete !== false,
 };
 const FILTER_NAMES = Object.keys(FILTER_MAP);
-
+const defaultLiveText: string = "Press spacebar to reorder";
 function App() {
   const [theme, setTheme] = useState("light");
 
@@ -69,8 +71,12 @@ function App() {
       },
     ],
   };
+
   const [items, setItems] = useState(DATA.toDoItems);
   const [filter, setFilter] = useState("All");
+  const [liveText, setLiveText] = useState(defaultLiveText);
+
+  // const updateLiveText (String announcement)
   const countItemsLeft = () => {
     let count = 0;
     items.forEach((item) => {
@@ -225,6 +231,9 @@ function App() {
           </Header>
           <Container>
             <ToDoForm addToDoItem={addItem}></ToDoForm>
+            <TextAssistive id="operation" aria-live="assertive">
+              {liveText}
+            </TextAssistive>
             <ToDoMain
               ToDoItem={toDoList}
               filterButtonList={filterButtonList}

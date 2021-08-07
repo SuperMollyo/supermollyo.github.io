@@ -73,7 +73,7 @@ export const ToDoItem = (props: {
   index: number;
 }) => {
   return (
-    <Li>
+    <Li role="option" aria-describedby="operation">
       <RoundCheckbox
         toDoItem={props.toDoItem}
         toggleFunction={props.toggleIsComplete}
