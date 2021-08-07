@@ -34,7 +34,14 @@ function App() {
   };
   const toggleIsComplete = (id: string) => {
     const updatedItems = items.map((item) => {
-      console.log("item: " + item.name + "isComplete: " + item.isComplete);
+      console.log(
+        "item: " +
+          item.name +
+          "id: " +
+          item.id +
+          " isComplete: " +
+          item.isComplete
+      );
       if (id === item.id) {
         if (item.isComplete === true) {
           setItemsLeftCount(itemsLeftCount + 1);
@@ -163,11 +170,11 @@ function App() {
     setItems([...items, newItem]);
     setItemsLeftCount(itemsLeftCount + 1);
   };
-  const deleteItem = (id: string) => {
+  const deleteItem = (id: string, isComplete: boolean) => {
     console.log("delete");
     const updatedItems = items.filter((items) => id !== items.id);
     setItems(updatedItems);
-    decrementItemsLeft();
+    if (!isComplete) decrementItemsLeft();
   };
   const clearCompletedItems = () => {
     const updatedItems = items.filter((items) => items.isComplete === false);
@@ -221,8 +228,6 @@ function App() {
             <ToDoMain
               ToDoItem={toDoList}
               filterButtonList={filterButtonList}
-              toggleIsComplete={toggleIsComplete}
-              deleteItem={deleteItem}
               itemsLeft={itemsLeftCount}
               clearAllItems={clearCompletedItems}
             />

@@ -15,8 +15,6 @@ export interface ToDoProps {
   filterButtonList: JSX.Element[];
   itemsLeft: number;
   clearAllItems: () => void;
-  toggleIsComplete: (id: string) => void;
-  deleteItem: (id: string) => void;
 }
 
 export const ToDoMain = (props: ToDoProps) => {
